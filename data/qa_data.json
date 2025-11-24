@@ -1,8 +1,8 @@
 {
-    "available": "on",
+    "available": true,
     "productName": "Test Automation with Selenium",
     "productId": "prod_PMYWvWHeM3LeY9",
-    "teen": "no",
+    "teen": false,
     "type": "Program",
     "programId": 56,
     "programCode": "taws",

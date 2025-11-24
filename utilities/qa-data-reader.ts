@@ -1,9 +1,11 @@
 import { readFileSync } from "fs";
+import path from "path";
+import { faker } from "@faker-js/faker";
 
 /**
  * Interface defining the structure of price data
  */
-interface PriceData {
+export interface PriceData {
   active: boolean;
   baseAmount: number;
   type: string;
@@ -17,7 +19,7 @@ interface PriceData {
 /**
  * Class representing a price option for a product
  */
-class Price {
+export class Price {
   active: boolean;
   baseAmount: number;
   type: string;
@@ -48,20 +50,20 @@ class Price {
     this.upfrontDiscountAmount = upfrontDiscountAmount;
     this.allowCoupons = allowCoupons;
     this.couponDiscount = couponDiscount;
-    this.numberOfInstallments = numberOfInstallments || null;
+    this.numberOfInstallments = numberOfInstallments ?? null;
   }
 }
 
 /**
  * Interface defining the structure of product data
  */
-interface ProductData {
+export interface ProductData {
   available: boolean;
   productName: string;
   productId: string;
   teen: boolean;
   type: string;
-  programId: string;
+  programId: number; // in JSON it's a number (56)
   programCode: string;
   programName: string;
   startDate: string;
@@ -74,13 +76,13 @@ interface ProductData {
 /**
  * Class representing a product
  */
-class Product {
+export class Product {
   available: boolean;
   productName: string;
   productId: string;
   teen: boolean;
   type: string;
-  programId: string;
+  programId: number;
   programCode: string;
   programName: string;
   startDate: string;
@@ -125,6 +127,80 @@ class Product {
 }
 
 /**
- * Exports a Product instance created from JSON data in a file
+ * Load QA data from JSON (once)
  */
-export const productInfo = new Product(JSON.parse(readFileSync("./data/qa_data.json", "utf8")));
+const dataPath = path.resolve("data/qa_data.json");
+const rawData = readFileSync(dataPath, "utf8");
+
+/**
+ * Raw parsed JSON data from qa_data.json
+ */
+export const qaData: ProductData = JSON.parse(rawData) as ProductData;
+
+/**
+ * Strongly-typed Product instance created from qa_data.json
+ */
+export const productInfo = new Product(qaData);
+
+/**
+ * Interface for generated test user
+ */
+export interface TestUser {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  howDidYouHear: string;
+}
+
+/**
+ * Generates a random test user using faker.
+ * Can be used in TDD tests when you want fresh data per run.
+ */
+export function generateTestUser(): TestUser {
+  return {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    email: faker.internet.email({ provider: "example.com" }),
+    phone: faker.string.numeric(10),
+    howDidYouHear: "LinkedIn",
+  };
+}
+
+/**
+ * Interface for default enrollment data
+ */
+export interface EnrollmentData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  howDidYouHear: string;
+  startDate: string;
+  refundDate: string;
+}
+
+/**
+ * Default user + date info based on qaData.
+ * Useful when you want stable, non-random data.
+ */
+export const defaultEnrollmentData: EnrollmentData = {
+  firstName: "Anna",
+  lastName: "Virchenko",
+  email: "anna.virchenko@example.com",
+  phone: "5551234567",
+  howDidYouHear: "Email",
+  startDate: qaData.startDate,
+  refundDate: qaData.refundDate,
+};
+
+/**
+ * Convenient helpers for price lookup
+ */
+export const upfrontPrice: Price | undefined = productInfo.prices.find(
+  (p) => p.type === "one-time"
+);
+
+export const installmentsPrice: Price | undefined = productInfo.prices.find(
+  (p) => p.type === "recurring"
+);
