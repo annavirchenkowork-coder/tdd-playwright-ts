@@ -1,145 +1,237 @@
+import { Page, Locator } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import { Locator } from 'playwright';
 
 export class PaymentPlanPage extends BasePage {
+  public readonly chooseAPaymentPlanText: Locator;
+  public readonly upfrontPaymentOption: Locator;
+  public readonly upfrontPaymentAmount: Locator;
+  public readonly payOnceTextUpFront: Locator;
+  public readonly upfrontPaymentFrame: Locator;
+  public readonly upfrontPanelContent: Locator;
+  public readonly installmentsPanelContent: Locator;
 
-  public readonly chooseAPaymentPlanText: Locator 
-    = this.locator("//*[text()='Choose a payment plan']");
+  public readonly greenBadgeUpfrontDiscount: Locator;
+  public readonly greenBadgeElectricBoltUpfrontDiscount: Locator;
+  public readonly greenBadgeTextUpfrontDiscount: Locator;
+  public readonly couponAvailableBadgeUpfrontDiscount: Locator;
+  public readonly couponBoxCloseBtnX: Locator;
 
-  public readonly upfrontPaymentOption: Locator 
-    = this.locator("//span[@class='payment-type'][contains(text(),'Upfront')]");
+  public readonly basePriceTextUnderUpfront: Locator;
+  public readonly basePriceAmountUnderUpfront: Locator;
+  public readonly upfrontDiscountTextUnderUpfront: Locator;
+  public readonly upfrontDiscountAmountUnderUpfront: Locator;
+  public readonly iHaveAPromoCodeButtonUnderUpfront: Locator;
+  public readonly subtotalTextUnderUpfront: Locator;
+  public readonly subtotalAmountUnderUpfront: Locator;
+  public readonly excludingFeesTextUnderUpfront: Locator;
 
-  public readonly upfrontPaymentAmount: Locator 
-    = this.locator("//span[@class='discount-price']");
+  public readonly installmentsPaymentOption: Locator;
+  public readonly installmentsPaymentFrame: Locator;
+  public readonly installmentsPaymentAmount: Locator;
+  public readonly perMonthTextInstallments: Locator;
+  public readonly couponAvailableBadgeInstallments: Locator;
+  public readonly basePriceTextUnderInstallments: Locator;
+  public readonly basePriceAmountUnderInstallments: Locator;
+  public readonly installmentsTextUnderInstallments: Locator;
+  public readonly installmentsNumberUnderInstallments: Locator;
+  public readonly pricePerInstallmentsTextUnderInstallments: Locator;
+  public readonly pricePerInstallmentsAmountUnderInstallments: Locator;
+  public readonly dueTodayTextUnderInstallments: Locator;
+  public readonly firstMonthPaymentTextUnderInstallments: Locator;
+  public readonly firstMonthPaymentAmountUnderInstallments: Locator;
+  public readonly excludingFeesTextUnderInstallments: Locator;
+  public readonly iHaveAPromoCodeButtonUnderInstallments: Locator;
 
-  public readonly payOnceTextUpFront: Locator 
-    = this.locator("//span[@class='discount-price']/span");
+  public readonly inactiveNextButton: Locator;
+  public readonly activeNextButton: Locator;
+  public readonly backButton: Locator;
+  public readonly footerText: Locator;
+  public readonly paymentPlanBoxes: Locator;
+  public readonly step1: Locator;
+  public readonly step2: Locator;
+  public readonly step3: Locator;
+  public readonly upfrontText: Locator;
 
-  public readonly upfrontPaymentFrame: Locator 
-    = this.locator("(//mat-expansion-panel-header[@role='button'])[1]");
+  constructor(page: Page) {
+    super(page);
 
-  public readonly greenBadgeUpfrontDiscount: Locator 
-    = this.locator("//span[@class='chip-content']");
+    this.chooseAPaymentPlanText = this.locator(
+      "//*[text()='Choose a payment plan']"
+    );
 
-  public readonly greenBadgeElectricBoltUpfrontDiscount: Locator 
-    = this.locator("//span[@class='chip-content']/span[@class='material-symbols-outlined light-icon']");
+    this.upfrontPaymentOption = this.locator(
+      "//span[@class='payment-type'][contains(text(),'Upfront')]"
+    );
 
-  public readonly greenBadgeTextUpfrontDiscount: Locator 
-    = this.locator("//span[@class='chip-content']");
+    this.upfrontPaymentAmount = this.locator(
+      "//span[@class='discount-price']"
+    );
 
-  public readonly couponAvailableBadgeUpfrontDiscount: Locator 
-    = this.locator("//mat-chip[contains(@class, 'coupon-badge')]");
+    this.payOnceTextUpFront = this.locator(
+      "//span[@class='discount-price']/span"
+    );
 
-  public readonly couponBoxCloseBtnX: Locator 
-    = this.locator('//*[@id="cdk-accordion-child-0"]/div/div/div[3]/mat-form-field/div[1]/div[2]/div[2]/button/span[3]');
+    this.upfrontPaymentFrame = this.locator(
+      "(//mat-expansion-panel-header[@role='button'])[1]"
+    );
 
-  public readonly basePriceTextUnderUpfront: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Base price')]");
+    this.upfrontPanelContent = this.locator(
+      "(//mat-expansion-panel)[1]//div[contains(@class,'mat-expansion-panel-content')]"
+    );
 
-  public readonly basePriceAmountUnderUpfront: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Base price')]/following-sibling::span");
+    this.installmentsPanelContent = this.locator(
+      "(//mat-expansion-panel)[2]//div[contains(@class,'mat-expansion-panel-content')]"
+    );
 
-  public readonly upfrontDiscountTextUnderUpfront: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Upfront')]");
+    this.greenBadgeUpfrontDiscount = this.locator(
+      "//span[@class='chip-content']"
+    );
 
-  public readonly upfrontDiscountAmountUnderUpfront: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Upfront')]/following-sibling::span");
+    this.greenBadgeElectricBoltUpfrontDiscount = this.locator(
+      "//span[@class='chip-content']/span[@class='material-symbols-outlined light-icon']"
+    );
 
-  public readonly iHaveAPromoCodeButtonUnderUpfront: Locator 
-    = this.locator("//button[contains(text(), 'I have a promo code')]");
+    this.greenBadgeTextUpfrontDiscount = this.locator(
+      "//span[@class='chip-content']"
+    );
 
-  public readonly subtotalTextUnderUpfront: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/div/span[contains(text(), 'Subtotal')]");
+    this.couponAvailableBadgeUpfrontDiscount = this.locator(
+      "//mat-chip[contains(@class, 'coupon-badge')]"
+    );
 
-  public readonly subtotalAmountUnderUpfront: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/div/span[contains(text(), 'Subtotal')]/following-sibling::span");
+    this.couponBoxCloseBtnX = this.locator(
+      '//*[@id="cdk-accordion-child-0"]/div/div/div[3]/mat-form-field/div[1]/div[2]/div[2]/button/span[3]'
+    );
 
-  public readonly excludingFeesTextUnderUpfront: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/i[contains(text(), 'excluding fees')]");
+    this.basePriceTextUnderUpfront = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Base price')]"
+    );
 
-  public readonly installmentsPaymentOption: Locator 
-    = this.locator("//span[@class='payment-type'][contains(text(),'Installments')]");
+    this.basePriceAmountUnderUpfront = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Base price')]/following-sibling::span"
+    );
 
-  public readonly installmentsPaymentFrame: Locator 
-    = this.locator("(//mat-expansion-panel-header[@role='button'])[2]");
+    this.upfrontDiscountTextUnderUpfront = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Upfront')]"
+    );
 
-  public readonly installmentsPaymentAmount: Locator 
-    = this.locator("//span[@class='discount-price ng-star-inserted']");
+    this.upfrontDiscountAmountUnderUpfront = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Upfront')]/following-sibling::span"
+    );
 
-  public readonly perMonthTextInstallments: Locator 
-    = this.locator("//span[@class='discount-price ng-star-inserted']/span");
+    this.iHaveAPromoCodeButtonUnderUpfront = this.locator(
+      "//button[contains(text(), 'I have a promo code')]"
+    );
 
-  public readonly couponAvailableBadgeInstallments: Locator 
-    = this.locator("(//mat-chip[contains(@class, 'coupon-badge')])[2]");
+    this.subtotalTextUnderUpfront = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/div/span[contains(text(), 'Subtotal')]"
+    );
 
-  public readonly basePriceTextUnderInstallments: Locator 
-    = this.locator("//div[@class='content-panel-item coupon-section ng-star-inserted']/div/span[contains(text(), 'Base price')]");
+    this.subtotalAmountUnderUpfront = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/div/span[contains(text(), 'Subtotal')]/following-sibling::span"
+    );
 
-  public readonly basePriceAmountUnderInstallments: Locator 
-    = this.locator("//div[@class='content-panel-item coupon-section ng-star-inserted']/div/span[contains(text(), 'Base price')]/following-sibling::span");
+    this.excludingFeesTextUnderUpfront = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/i[contains(text(), 'excluding fees')]"
+    );
 
-  public readonly installmentsTextUnderInstallments: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Installments')]");
+    this.installmentsPaymentOption = this.locator(
+      "//span[@class='payment-type'][contains(text(),'Installments')]"
+    );
 
-  public readonly installmentsNumberUnderInstallments: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Installments')]/following-sibling::span");
+    this.installmentsPaymentFrame = this.locator(
+      "(//mat-expansion-panel-header[@role='button'])[2]"
+    );
 
-  public readonly pricePerInstallmentsTextUnderInstallments: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Price per installment')]");
+    this.installmentsPaymentAmount = this.locator(
+      "//span[@class='discount-price ng-star-inserted']"
+    );
 
-  public readonly pricePerInstallmentsAmountUnderInstallments: Locator 
-    = this.locator("//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Price per installment')]/following-sibling::span");
+    this.perMonthTextInstallments = this.locator(
+      "//span[@class='discount-price ng-star-inserted']/span"
+    );
 
-  public readonly dueTodayTextUnderInstallments: Locator 
-    = this.locator("//span[@class='sub-item-panel ng-star-inserted' and contains(text(), 'Due Today')]");
+    this.couponAvailableBadgeInstallments = this.locator(
+      "(//mat-chip[contains(@class, 'coupon-badge')])[2]"
+    );
 
-  public readonly firstMonthPaymentTextUnderInstallments: Locator 
-    = this.locator("//div[@class='fee-items-holder']/span[contains(text(), 'First month')]");
+    this.basePriceTextUnderInstallments = this.locator(
+      "//div[@class='content-panel-item coupon-section ng-star-inserted']/div/span[contains(text(), 'Base price')]"
+    );
 
-  public readonly firstMonthPaymentAmountUnderInstallments: Locator 
-    = this.locator("//div[@class='fee-items-holder']/span[contains(text(), 'First month')]/following-sibling::span");
+    this.basePriceAmountUnderInstallments = this.locator(
+      "//div[@class='content-panel-item coupon-section ng-star-inserted']/div/span[contains(text(), 'Base price')]/following-sibling::span"
+    );
 
-  public readonly excludingFeesTextUnderInstallments: Locator 
-    = this.locator("(//div[@class='content-panel-item ng-star-inserted']/i[contains(text(), 'excluding fees')])[2]");
+    this.installmentsTextUnderInstallments = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Installments')]"
+    );
 
-  public readonly iHaveAPromoCodeButtonUnderInstallments: Locator 
-    = this.locator("(//button[contains(text(), 'I have a promo code')])[2]");
+    this.installmentsNumberUnderInstallments = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Installments')]/following-sibling::span"
+    );
 
-  public readonly inactiveNextButton: Locator 
-    = this.locator("//button[text()='Next']");
+    this.pricePerInstallmentsTextUnderInstallments = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Price per installment')]"
+    );
 
-  public readonly activeNextButton: Locator 
-    = this.locator("//button[@class = 'next-button' and text()='Next']");
+    this.pricePerInstallmentsAmountUnderInstallments = this.locator(
+      "//div[@class='content-panel-item ng-star-inserted']/span[contains(text(), 'Price per installment')]/following-sibling::span"
+    );
 
-  public readonly backButton: Locator 
-    = this.locator("//span[@class='back-button']");
+    this.dueTodayTextUnderInstallments = this.locator(
+      "//span[@class='sub-item-panel ng-star-inserted' and contains(text(), 'Due Today')]"
+    );
 
-  public readonly footerText: Locator 
-    = this.locator("(//p[@class = 'footer-text' and contains(text(), 'Need help?')])[2]");
+    this.firstMonthPaymentTextUnderInstallments = this.locator(
+      "//div[@class='fee-items-holder']/span[contains(text(), 'First month')]"
+    );
 
-  public readonly paymentPlanBoxes: Locator 
-    = this.locator("//mat-accordion[@class='mat-accordion']/div/mat-expansion-panel/mat-expansion-panel-header");
+    this.firstMonthPaymentAmountUnderInstallments = this.locator(
+      "//div[@class='fee-items-holder']/span[contains(text(), 'First month')]/following-sibling::span"
+    );
 
-  public readonly step1: Locator 
-    = this.locator("//div[@class='step-circle'][contains(.,'1')]");
+    this.excludingFeesTextUnderInstallments = this.locator(
+      "(//div[@class='content-panel-item ng-star-inserted']/i[contains(text(), 'excluding fees')])[2]"
+    );
 
-  public readonly step2: Locator 
-    = this.locator("//div[@class='step-circle'][contains(.,'2')]");
+    this.iHaveAPromoCodeButtonUnderInstallments = this.locator(
+      "(//button[contains(text(), 'I have a promo code')])[2]"
+    );
 
-  public readonly step3: Locator 
-    = this.locator("//div[@class='step-circle'][contains(.,'3')]");
+    this.inactiveNextButton = this.locator(
+      "//button[text()='Next' and @disabled]"
+    );
 
-  public readonly UpfrontText: Locator 
-    = this.locator("//span[@class='payment-type']");
-  
-    
-  public async selectPaymentPlan(paymentPlan: string) {
-    paymentPlan = paymentPlan.toLowerCase();
+    this.activeNextButton = this.locator(
+      "//button[@class='next-button' and text()='Next']"
+    );
+
+    this.backButton = this.locator("//span[@class='back-button']");
+
+    this.footerText = this.locator(
+      "(//p[@class = 'footer-text' and contains(text(), 'Need help?')])[2]"
+    );
+
+    this.paymentPlanBoxes = this.locator(
+      "//mat-accordion[@class='mat-accordion']/div/mat-expansion-panel/mat-expansion-panel-header"
+    );
+
+    this.step1 = this.locator("//div[@class='step-circle'][contains(.,'1')]");
+    this.step2 = this.locator("//div[@class='step-circle'][contains(.,'2')]");
+    this.step3 = this.locator("//div[@class='step-circle'][contains(.,'3')]");
+
+    this.upfrontText = this.locator("//span[@class='payment-type']");
+  }
+
+  public async selectPaymentPlan(paymentPlan: string): Promise<void> {
+    const plan = paymentPlan.toLowerCase();
+
     switch (true) {
-      case paymentPlan.includes('upfront'):
+      case plan.includes("upfront"):
         await this.upfrontPaymentOption.click();
         break;
-      case paymentPlan.includes('installments'):
+      case plan.includes("installments"):
         await this.installmentsPaymentOption.click();
         break;
       default:
@@ -147,9 +239,7 @@ export class PaymentPlanPage extends BasePage {
     }
   }
 
-  public async clickNextButton() {
+  public async clickNextButton(): Promise<void> {
     await this.activeNextButton.click();
   }
-
-
 }
