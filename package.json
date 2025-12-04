@@ -1,18 +1,31 @@
 {
-  "name": "sep-automation-tdd-ts",
+  "name": "tdd-playwright-ts",
   "version": "1.0.0",
+  "description": "Test-Driven Development (TDD) automation framework using Playwright and TypeScript.",
+  "author": "Anna Virchenko",
+  "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "tests": "npx playwright test",
+    "test": "npx playwright test",
     "test:specific": "npx playwright test --grep file-name.spec.ts",
+    "test:headed": "playwright test --headed",
+    "test:debug": "PWDEBUG=1 playwright test",
     "test:tag": "npx playwright test --grep @tagName",
-    "report": "npx playwright show-report"
+    "report": "npx playwright show-report",
+    "playwright:install": "playwright install --with-deps"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "playwright",
+    "typescript",
+    "automation",
+    "tdd",
+    "e2e-testing"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.10.1",
     "ts-node": "^10.9.2",

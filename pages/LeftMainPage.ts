@@ -1,19 +1,25 @@
+import { Page, Locator } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import { Locator } from 'playwright';
 
 export class LeftMainPage extends BasePage {
+  public readonly cydeoImageAtLeftWindow: Locator;
+  public readonly secureCheckout: Locator;
+  public readonly footerElements: Locator;
+  public readonly programName: Locator;
 
-  public readonly cydeoImageAtLeftWindow: Locator 
-    = this.locator("(//img[@src = 'assets/images/logo.svg'])[2]");
+  constructor(page: Page) {
+    super(page);
 
-  public readonly secureCheckout: Locator 
-    = this.locator("//p[@class='checkout-title']");
+    this.cydeoImageAtLeftWindow = this.locator(
+      "(//img[@src = 'assets/images/logo.svg'])[2]"
+    );
 
-  public readonly footerElements: Locator 
-    = this.locator("//a[contains(@href, 'https://cydeo.com/')]");
+    this.secureCheckout = this.locator("//p[@class='checkout-title']");
 
-  public readonly programName: Locator 
-    = this.locator("//p[@class='course-name']/a");
-    
+    this.footerElements = this.locator(
+      "//a[contains(@href, 'https://cydeo.com/')]"
+    );
 
+    this.programName = this.locator("//p[@class='course-name']/a");
+  }
 }
